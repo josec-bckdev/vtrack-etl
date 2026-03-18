@@ -4,23 +4,48 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-	  "prepare": "husky",
-	  "commit": "cz",
-	  "test": "echo 'No tests yet' && exit 0",
-	  "test:unit": "vitest"
+		"prepare": "husky",
+		"commit": "cz",
+		"test": "echo 'No tests yet' && exit 0",
+		"test:unit": "vitest",
+		"prisma:seed": "ts-node src/infrastructure/db/prisma/seed.ts"
 	},
 	"config": {
-	  "commitizen": {
-	    "path": "cz-conventional-changelog"
-	  }
+		"commitizen": {
+			"path": "cz-conventional-changelog"
+		}
+	},
+	"jest": {
+		"preset": "ts-jest",
+		"testEnvironment": "node",
+		"roots": [
+			"<rootDir>/tests"
+		],
+		"testMatch": [
+			"**/*.test.ts"
+		],
+		"collectCoverageFrom": [
+			"src/**/*.ts",
+			"!src/infrastructure/db/prisma/seed.ts",
+			"!src/api/server.ts"
+		],
+		"coverageThreshold": {
+			"global": {
+				"lines": 95,
+				"functions": 95,
+				"branches": 95
+			}
+		}
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"@prisma/adapter-pg": "^7.5.0",
 		"@prisma/client": "^7.5.0",
 		"axios": "^1.13.6",
 		"express": "^5.2.1",
 		"js-yaml": "^4.1.1",
+		"pg": "^8.20.0",
 		"prisma": "^7.5.0",
 		"winston": "^3.19.0",
 		"zod": "^4.3.6"
@@ -33,6 +58,7 @@
 		"@types/jest": "^30.0.0",
 		"@types/js-yaml": "^4.0.9",
 		"@types/node": "^25.5.0",
+		"@types/pg": "^8.18.0",
 		"@types/supertest": "^7.2.0",
 		"commitizen": "^4.3.1",
 		"cz-conventional-changelog": "^3.3.0",

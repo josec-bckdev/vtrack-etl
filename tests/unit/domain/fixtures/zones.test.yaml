@@ -1,0 +1,14 @@
+zones:
+  - zone_id: 1
+    name: "Test Zone Entry"
+    latitude: 4.773210
+    longitude: -74.084051
+    radius_meters: 300
+    alert_type: "GEOFENCE_ENTRY"
+
+  - zone_id: 2
+    name: "Test Zone Exit"
+    latitude: 4.767916
+    longitude: -74.076541
+    radius_meters: 1500
+    alert_type: "GEOFENCE_EXIT"
