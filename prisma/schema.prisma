@@ -60,4 +60,6 @@ model RouteGeopoint {
   zone       Zone?    @relation(fields: [zone_id], references: [zone_id])
 
   @@map("route_geopoint")
+  @@index([route_id])
+  @@index([event_ts])
 }
