@@ -1,0 +1,42 @@
+# Keep environment variables out of version control
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+coverage/
+.nyc_output/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+# VSCode
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+.vscode/**/*.code-snippets
+.vtrack-etl.code-workspace
+*.code-workspace
+.vscode/
+*.swp
+*.swo
+
+# Prisma
+# (schema + migrations SHOULD be committed, only generated client can be ignored if you prefer)
+prisma/generated/
