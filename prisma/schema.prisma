@@ -1,13 +1,63 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+model TimeBand {
+  code       String  @id @db.VarChar(10)
+  label      String  @db.VarChar(50)
+  start_hour Int     @db.SmallInt
+  end_hour   Int     @db.SmallInt
+
+  routes     Route[]
+
+  @@map("time_band")
+}
+
+model Zone {
+  id           Int     @id @default(autoincrement())
+  zone_id      Int     @unique
+  name         String  @db.VarChar(100)
+  latitude     Decimal @db.Decimal(10, 8)
+  longitude    Decimal @db.Decimal(11, 8)
+  radius_m     Int
+  alert_type   String  @db.VarChar(20)
+  enabled      Boolean @default(true)
+
+  geopoints    RouteGeopoint[]
+
+  @@map("zone")
+}
+
+model Route {
+  id             String   @id @default(uuid()) @db.Uuid
+  ruta           Int
+  time_band_code String   @db.VarChar(10)
+  name           String   @db.VarChar(255)
+  date_captured  DateTime @db.Date
+
+  time_band      TimeBand       @relation(fields: [time_band_code], references: [code])
+  geopoints      RouteGeopoint[]
+
+  @@unique([ruta, time_band_code, date_captured])
+  @@map("route")
+}
+
+model RouteGeopoint {
+  id         BigInt   @id @default(autoincrement())
+  route_id   String   @db.Uuid
+  zone_id    Int?
+  geotag     String   @db.VarChar(100)
+  event_type String   @db.VarChar(20)
+  event_ts   DateTime @db.Timestamptz()
+  latitude   Decimal  @db.Decimal(10, 8)
+  longitude  Decimal  @db.Decimal(11, 8)
+
+  route      Route    @relation(fields: [route_id], references: [id], onDelete: Cascade)
+  zone       Zone?    @relation(fields: [zone_id], references: [zone_id])
+
+  @@map("route_geopoint")
 }
