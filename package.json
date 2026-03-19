@@ -6,8 +6,7 @@
 	"scripts": {
 		"prepare": "husky",
 		"commit": "cz",
-		"test": "echo 'No tests yet' && exit 0",
-		"test:unit": "vitest",
+		"test": "jest",
 		"prisma:seed": "ts-node src/infrastructure/db/prisma/seed.ts"
 	},
 	"config": {
