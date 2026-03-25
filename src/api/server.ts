@@ -9,6 +9,7 @@ import { PrismaRouteRepository } from "../infrastructure/db/PrismaRouteRepositor
 import { PrismaBatchJobRepository } from "../infrastructure/db/PrismaBatchJobRepository";
 import { DatalakeClient } from "../infrastructure/http/DatalakeClient";
 import { ZONES_YAML_PATH } from "../infrastructure/config/constants";
+import { startScheduler } from "../infrastructure/scheduler/scheduler";
 
 export function createApp() {
   const app = express();
@@ -38,6 +39,9 @@ export async function startServer(): Promise<void> {
       env:     env.NODE_ENV,
     });
   });
+
+  // start daily scheduler
+  startScheduler();
 }
 
 // only start if this file is run directly

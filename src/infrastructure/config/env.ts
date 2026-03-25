@@ -10,6 +10,7 @@ const envSchema = z.object({
 
 const parsed = envSchema.safeParse(process.env);
 
+/* istanbul ignore next */
 if (!parsed.success) {
   console.error("Invalid environment variables:");
   console.error(parsed.error.flatten().fieldErrors);

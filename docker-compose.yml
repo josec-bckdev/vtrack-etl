@@ -30,10 +30,11 @@ services:
       DATABASE_URL: postgresql://vtrack:vtrack_pass@db:5432/vtrack_etl
       DATALAKE_API_URL: ${DATALAKE_API_URL}
       NODE_ENV: production
+      PORT: 3000
     ports:
       - "3000:3000"
     profiles:
-      - app   # only starts when explicitly requested
+      - app
 
 volumes:
   vtrack_pgdata:
