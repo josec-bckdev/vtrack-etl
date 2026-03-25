@@ -36,7 +36,6 @@ model Route {
   id             String   @id @default(uuid()) @db.Uuid
   ruta           Int
   time_band_code String   @db.VarChar(10)
-  name           String   @db.VarChar(255)
   date_captured  DateTime @db.Date
 
   time_band      TimeBand       @relation(fields: [time_band_code], references: [code])
