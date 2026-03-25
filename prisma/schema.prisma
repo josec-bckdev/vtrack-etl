@@ -62,3 +62,16 @@ model RouteGeopoint {
   @@index([route_id])
   @@index([event_ts])
 }
+
+model BatchJob {
+  id           String    @id @default(uuid()) @db.Uuid
+  triggered_at DateTime  @default(now()) @db.Timestamptz()
+  completed_at DateTime? @db.Timestamptz()
+  status       String    @db.VarChar(20)
+  ruta         Int
+  start_date   DateTime  @db.Date
+  end_date     DateTime  @db.Date
+  summary      Json?
+
+  @@map("batch_job")
+}
