@@ -1,5 +1,6 @@
 import path from "path";
 import { loadZones } from "../../../src/domain/zone/ZoneLoader";
+import { Zone } from "../../../src/domain/zone/Zone";
 
 const TEST_YAML_PATH = path.join(__dirname, "fixtures", "zones.test.yaml");
 
@@ -34,7 +35,7 @@ describe("loadZones", () => {
 
   it("should load all zones as enabled by default", () => {
     const zones = loadZones(TEST_YAML_PATH);
-    expect(zones.every(z => z.enabled)).toBe(true);
+    expect(zones.every((z: Zone) => z.enabled)).toBe(true);
   });
 
   it("should throw a descriptive error when file does not exist", () => {

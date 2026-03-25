@@ -52,7 +52,6 @@ export function createZone(data: ZoneData): Zone {
   return {
     ...data,
     isWithin(lat: number, lon: number): boolean {
-      if (!this.enabled) return false;
       const distance = geodesicDistanceMeters(
         this.latitude,
         this.longitude,

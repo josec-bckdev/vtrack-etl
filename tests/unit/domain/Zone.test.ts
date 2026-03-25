@@ -39,4 +39,16 @@ describe("Zone.isWithin", () => {
     // Bogotá city center, ~6km away
     expect(LICEO_JRJ.isWithin(4.711000, -74.072000)).toBe(false);
   });
+  it("should return false when coordinates cause calculation error", () => {
+  const zone = createZone({
+    zone_id:    1,
+    name:       "Test",
+    latitude:   NaN,
+    longitude:  NaN,
+    radius_m:   300,
+    alert_type: "GEOFENCE_EXIT",
+    enabled:    true,
+  });
+  expect(zone.isWithin(4.773210, -74.084051)).toBe(false);
+});
 });
