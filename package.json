@@ -4,16 +4,16 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-	"build":          "rimraf dist && tsc",
-	"start":          "node dist/api/server.js",
-	"dev":            "nodemon --watch src --ext ts --exec ts-node src/api/server.ts",
-	"test":           "jest --runInBand --forceExit",
-	"test:coverage":  "jest --runInBand --forceExit --coverage",
-	"prisma:migrate": "prisma migrate dev",
-	"prisma:seed":    "ts-node src/infrastructure/db/prisma/seed.ts",
-	"prisma:studio":  "prisma studio",
-	"prepare":        "husky",
-	"commit":         "cz"
+		"build": "rimraf dist && tsc",
+		"start": "node dist/api/server.js",
+		"dev": "nodemon --watch src --ext ts --exec ts-node src/api/server.ts",
+		"test": "jest --runInBand --forceExit",
+		"test:coverage": "jest --runInBand --forceExit --coverage",
+		"prisma:migrate": "prisma migrate dev",
+		"prisma:seed": "ts-node src/infrastructure/db/prisma/seed.ts",
+		"prisma:studio": "prisma studio",
+		"prepare": "husky",
+		"commit": "cz"
 	},
 	"config": {
 		"commitizen": {
@@ -50,6 +50,7 @@
 		"axios": "^1.13.6",
 		"express": "^5.2.1",
 		"js-yaml": "^4.1.1",
+		"node-cron": "^4.2.1",
 		"pg": "^8.20.0",
 		"prisma": "^7.5.0",
 		"winston": "^3.19.0",
@@ -63,6 +64,7 @@
 		"@types/jest": "^30.0.0",
 		"@types/js-yaml": "^4.0.9",
 		"@types/node": "^25.5.0",
+		"@types/node-cron": "^3.0.11",
 		"@types/supertest": "^7.2.0",
 		"commitizen": "^4.3.1",
 		"cz-conventional-changelog": "^3.3.0",

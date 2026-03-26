@@ -29,11 +29,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          node-version-file: '.nvmrc'
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
       - name: Install dependencies
@@ -43,11 +45,17 @@ jobs:
         run: npx prisma generate
         env:
           DATABASE_URL: postgresql://vtrack:vtrack_pass@localhost:5432/vtrack_etl
-
+      
       - name: Run migrations
         run: npx prisma migrate deploy
         env:
           DATABASE_URL: postgresql://vtrack:vtrack_pass@localhost:5432/vtrack_etl
+
+      - name: Seed database
+        run: npm run prisma:seed
+        env:
+          DATABASE_URL: postgresql://vtrack:vtrack_pass@localhost:5432/vtrack_etl
+          NODE_ENV: test
 
       - name: Run tests with coverage
         run: npm run test:coverage
